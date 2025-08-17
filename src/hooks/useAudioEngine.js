@@ -79,9 +79,19 @@ const useAudioEngine = () => {
       // Start level monitoring
       updateLevels();
 
-    } catch (err) {
+} catch (err) {
       console.error("Audio engine initialization failed:", err);
-      setError(err.message || "Failed to initialize audio engine");
+      
+      // Handle specific permission denied error
+      if (err.name === 'NotAllowedError' || err.message.includes('Permission denied')) {
+        setError('Microphone access denied. Please allow microphone permissions to record audio, or use playback-only mode.');
+      } else if (err.name === 'NotFoundError') {
+        setError('No microphone found. Please connect a microphone or use playback-only mode.');
+      } else if (err.name === 'NotSupportedError') {
+        setError('Audio recording is not supported in this browser. Try using Chrome, Firefox, or Safari.');
+      } else {
+        setError(err.message || "Failed to initialize audio engine");
+      }
     } finally {
       setLoading(false);
     }

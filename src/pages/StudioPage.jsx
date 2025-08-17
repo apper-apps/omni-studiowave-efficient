@@ -106,14 +106,64 @@ const StudioPage = () => {
     );
   }
 
-  if (audioError) {
+if (audioError) {
+    const isPermissionError = audioError.includes('Permission denied') || audioError.includes('Microphone access denied');
+    const isDeviceError = audioError.includes('No microphone found');
+    
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <Error 
-          title="Audio Engine Error"
-          message={audioError}
-          onRetry={retryAudio}
-        />
+        <div className="max-w-md mx-auto text-center space-y-6">
+          <div className="w-16 h-16 mx-auto rounded-full bg-error/10 flex items-center justify-center">
+            <ApperIcon name={isPermissionError ? "MicOff" : "AlertCircle"} size={32} className="text-error" />
+          </div>
+          
+          <div className="space-y-2">
+            <h2 className="text-2xl font-display font-bold text-white">
+              {isPermissionError ? "Microphone Access Required" : "Audio Engine Error"}
+            </h2>
+            <p className="text-gray-400 leading-relaxed">
+              {audioError}
+            </p>
+          </div>
+
+          {isPermissionError && (
+            <div className="bg-surface/50 rounded-lg p-4 text-sm text-gray-300 border border-gray-600">
+              <div className="flex items-start gap-3">
+                <ApperIcon name="Info" size={16} className="text-info mt-0.5 flex-shrink-0" />
+                <div className="space-y-2 text-left">
+                  <p className="font-medium">To enable recording:</p>
+                  <ol className="space-y-1 text-gray-400 list-decimal list-inside text-xs">
+                    <li>Click the microphone icon in your browser's address bar</li>
+                    <li>Select "Allow" to grant microphone access</li>
+                    <li>Refresh the page or click retry below</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-3 justify-center">
+            <Button onClick={retryAudio} className="flex items-center gap-2">
+              <ApperIcon name="RefreshCw" size={16} />
+              Try Again
+            </Button>
+            
+            {(isPermissionError || isDeviceError) && (
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  toast.info("Continuing in playback-only mode");
+                  // Continue without microphone access
+                  window.location.reload();
+                }}
+                className="flex items-center gap-2"
+              >
+                <ApperIcon name="Play" size={16} />
+                Continue Without Recording
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
