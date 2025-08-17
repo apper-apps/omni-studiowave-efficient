@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import TransportControls from "@/components/organisms/TransportControls";
-import WaveformDisplay from "@/components/organisms/WaveformDisplay";
-import AutotunePanel from "@/components/organisms/AutotunePanel";
-import EditingToolbar from "@/components/organisms/EditingToolbar";
-import LevelMeters from "@/components/organisms/LevelMeters";
-import ExportDialog from "@/components/organisms/ExportDialog";
-import Button from "@/components/atoms/Button";
+import useAutotuneSettings from "@/hooks/useAutotuneSettings";
+import useAudioEngine from "@/hooks/useAudioEngine";
 import ApperIcon from "@/components/ApperIcon";
-import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import useAudioEngine from "@/hooks/useAudioEngine";
-import useAutotuneSettings from "@/hooks/useAutotuneSettings";
+import Loading from "@/components/ui/Loading";
+import LevelMeters from "@/components/organisms/LevelMeters";
+import ExportDialog from "@/components/organisms/ExportDialog";
+import EditingToolbar from "@/components/organisms/EditingToolbar";
+import AutotunePanel from "@/components/organisms/AutotunePanel";
+import WaveformDisplay from "@/components/organisms/WaveformDisplay";
+import TransportControls from "@/components/organisms/TransportControls";
+import Button from "@/components/atoms/Button";
+import Select from "@/components/atoms/Select";
 
 const StudioPage = () => {
   const [selectedTool, setSelectedTool] = useState("select");
@@ -148,13 +149,12 @@ if (audioError) {
               Try Again
             </Button>
             
-            {(isPermissionError || isDeviceError) && (
+{(isPermissionError || isDeviceError) && (
               <Button 
                 variant="outline" 
                 onClick={() => {
-                  toast.info("Continuing in playback-only mode");
-                  // Continue without microphone access
-                  window.location.reload();
+                  toast.info("Continuing in playback-only mode - recording features disabled");
+                  // Note: Audio engine will handle playback-only mode internally
                 }}
                 className="flex items-center gap-2"
               >
