@@ -154,7 +154,9 @@ if (audioError) {
                 variant="outline" 
                 onClick={() => {
                   toast.info("Continuing in playback-only mode - recording features disabled");
-                  // Note: Audio engine will handle playback-only mode internally
+                  // Force continue by bypassing the error state
+                  // This allows users to access the studio interface without microphone
+                  window.location.reload();
                 }}
                 className="flex items-center gap-2"
               >
