@@ -127,9 +127,7 @@ const initializeAudioContext = useCallback(async (skipMicrophone = false) => {
     setInputLevel(level);
     setOutputLevel(isPlaying ? level * 0.8 : 0);
 
-    // Continue monitoring
-    animationFrameRef.current = requestAnimationFrame(updateLevels);
-
+// Continue monitoring
     animationFrameRef.current = requestAnimationFrame(updateLevels);
   }, [isPlaying]);
 

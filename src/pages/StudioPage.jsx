@@ -33,8 +33,8 @@ const StudioPage = () => {
     stopRecording,
     playAudio,
     pauseAudio,
-    stopAudio,
-seekTo,
+stopAudio,
+    seekTo,
     retry: retryAudio,
     enablePlaybackOnlyMode
   } = useAudioEngine();
@@ -118,13 +118,29 @@ if (audioError) {
             <ApperIcon name={isPermissionError ? "MicOff" : "AlertCircle"} size={32} className="text-error" />
           </div>
           
-          <div className="space-y-2">
+<div className="space-y-2">
             <h2 className="text-2xl font-display font-bold text-white">
               {isPermissionError ? "Microphone Access Required" : "Audio Engine Error"}
             </h2>
             <p className="text-gray-400 leading-relaxed">
-              {audioError}
+              {isPermissionError 
+                ? "To record audio, please allow microphone access when prompted. You can still use playback features without a microphone."
+                : audioError
+              }
             </p>
+          </div>
+          
+<div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button onClick={retryAudio} variant="outline" className="flex items-center gap-2">
+              <ApperIcon name="RefreshCw" size={16} />
+              Try Again
+            </Button>
+            {isPermissionError && (
+              <Button onClick={enablePlaybackOnlyMode} className="flex items-center gap-2">
+                <ApperIcon name="Play" size={16} />
+                Use Playback Mode
+              </Button>
+            )}
           </div>
 
           {isPermissionError && (
