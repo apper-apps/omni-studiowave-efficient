@@ -34,8 +34,8 @@ const StudioPage = () => {
     playAudio,
     pauseAudio,
     stopAudio,
-    seekTo,
-retry: retryAudio,
+seekTo,
+    retry: retryAudio,
     enablePlaybackOnlyMode
   } = useAudioEngine();
   const {

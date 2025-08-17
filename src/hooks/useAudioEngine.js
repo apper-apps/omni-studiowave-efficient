@@ -120,12 +120,15 @@ const initializeAudioContext = useCallback(async (skipMicrophone = false) => {
     let sum = 0;
     for (let i = 0; i < dataArray.length; i++) {
       sum += dataArray[i] * dataArray[i];
-    }
+}
     const rms = Math.sqrt(sum / dataArray.length);
     const level = (rms / 255) * 100;
 
     setInputLevel(level);
     setOutputLevel(isPlaying ? level * 0.8 : 0);
+
+    // Continue monitoring
+    animationFrameRef.current = requestAnimationFrame(updateLevels);
 
     animationFrameRef.current = requestAnimationFrame(updateLevels);
   }, [isPlaying]);
