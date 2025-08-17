@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "enabled": true,
+    "strength": 75,
+    "key": "C",
+    "scale": "Major",
+    "formant": 0
+  },
+  {
+    "Id": 2,
+    "enabled": false,
+    "strength": 50,
+    "key": "G",
+    "scale": "Minor",
+    "formant": -10
+  },
+  {
+    "Id": 3,
+    "enabled": true,
+    "strength": 90,
+    "key": "A",
+    "scale": "Major",
+    "formant": 5
+  }
+]

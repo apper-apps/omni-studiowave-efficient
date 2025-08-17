@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "name": "Vocal Recording Session",
+    "sampleRate": 44100,
+    "duration": 180.5,
+    "createdAt": "2024-01-15T10:30:00Z",
+    "tracks": [1, 2]
+  },
+  {
+    "Id": 2,
+    "name": "Podcast Episode 1",
+    "sampleRate": 48000,
+    "duration": 3600.0,
+    "createdAt": "2024-01-14T14:15:00Z",
+    "tracks": [3]
+  },
+  {
+    "Id": 3,
+    "name": "Instrumental Demo",
+    "sampleRate": 44100,
+    "duration": 240.0,
+    "createdAt": "2024-01-13T09:45:00Z",
+    "tracks": [4, 5]
+  }
+]

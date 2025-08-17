@@ -1,0 +1,120 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #0C0E10;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+  
+  .font-display {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+  
+  .font-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(45, 52, 54, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #6C5CE7, #00CEC9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .waveform-gradient {
+    background: linear-gradient(to top, #6C5CE7, #00CEC9);
+  }
+  
+  .level-meter-bar {
+    transition: height 50ms ease-out;
+    background: linear-gradient(to top, #00B894, #FDCB6E, #FF6B6B);
+  }
+  
+  .knob {
+    background: conic-gradient(from 0deg, #2D3436, #6C5CE7, #2D3436);
+    border: 2px solid #444;
+    transition: transform 150ms ease-out;
+  }
+  
+  .knob:hover {
+    transform: scale(1.05);
+  }
+  
+  .transport-button {
+    transition: all 150ms ease-out;
+    background: linear-gradient(135deg, #2D3436, #1E272E);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+  }
+  
+  .transport-button:hover {
+    transform: scale(0.95);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.4);
+  }
+  
+  .transport-button.active {
+    background: linear-gradient(135deg, #6C5CE7, #5A4FCF);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.6);
+  }
+}
+
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  background: #1E272E;
+  color: #ffffff;
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  border-radius: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--success {
+  border-color: rgba(0, 184, 148, 0.5);
+}
+
+.Toastify__toast--error {
+  border-color: rgba(255, 107, 107, 0.5);
+}
+
+.Toastify__toast--warning {
+  border-color: rgba(253, 203, 110, 0.5);
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(90deg, #6C5CE7, #00CEC9);
+}
+
+.Toastify__close-button {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1;
+}

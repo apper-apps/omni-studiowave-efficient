@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "name": "Lead Vocal",
+    "volume": 0.8,
+    "pan": 0.0,
+    "muted": false,
+    "effects": [1, 2]
+  },
+  {
+    "Id": 2,
+    "name": "Harmony",
+    "volume": 0.6,
+    "pan": -0.3,
+    "muted": false,
+    "effects": [1]
+  },
+  {
+    "Id": 3,
+    "name": "Voice Recording",
+    "volume": 0.9,
+    "pan": 0.0,
+    "muted": false,
+    "effects": [3]
+  },
+  {
+    "Id": 4,
+    "name": "Guitar",
+    "volume": 0.7,
+    "pan": 0.4,
+    "muted": false,
+    "effects": []
+  },
+  {
+    "Id": 5,
+    "name": "Bass",
+    "volume": 0.8,
+    "pan": 0.0,
+    "muted": false,
+    "effects": [4]
+  }
+]

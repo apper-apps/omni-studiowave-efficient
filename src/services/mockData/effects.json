@@ -1,0 +1,48 @@
+[
+  {
+    "Id": 1,
+    "type": "autotune",
+    "enabled": true,
+    "parameters": {
+      "strength": 75,
+      "key": "C",
+      "scale": "Major",
+      "formant": 0
+    }
+  },
+  {
+    "Id": 2,
+    "type": "reverb",
+    "enabled": true,
+    "parameters": {
+      "roomSize": 0.5,
+      "damping": 0.3,
+      "wetLevel": 0.2,
+      "dryLevel": 0.8
+    }
+  },
+  {
+    "Id": 3,
+    "type": "compressor",
+    "enabled": true,
+    "parameters": {
+      "threshold": -12,
+      "ratio": 4,
+      "attack": 0.01,
+      "release": 0.1
+    }
+  },
+  {
+    "Id": 4,
+    "type": "equalizer",
+    "enabled": true,
+    "parameters": {
+      "lowGain": 2,
+      "midGain": 0,
+      "highGain": 1.5,
+      "lowFreq": 200,
+      "midFreq": 1000,
+      "highFreq": 5000
+    }
+  }
+]
