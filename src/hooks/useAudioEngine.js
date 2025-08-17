@@ -13,14 +13,14 @@ const useAudioEngine = () => {
   const [audioBuffer, setAudioBuffer] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [playbackOnlyMode, setPlaybackOnlyMode] = useState(false);
   const analyserRef = useRef(null);
   const sourceRef = useRef(null);
   const animationFrameRef = useRef(null);
   const playbackSourceRef = useRef(null);
   const recordedChunksRef = useRef([]);
 
-  const initializeAudioContext = useCallback(async () => {
+const initializeAudioContext = useCallback(async (skipMicrophone = false) => {
     try {
       setLoading(true);
       setError(null);
@@ -28,6 +28,13 @@ const useAudioEngine = () => {
       // Create audio context
       const context = new (window.AudioContext || window.webkitAudioContext)();
       setAudioContext(context);
+
+      // Skip microphone setup if in playback-only mode
+      if (skipMicrophone || playbackOnlyMode) {
+        setPlaybackOnlyMode(true);
+        setLoading(false);
+        return;
+      }
 
       // Get microphone access
       const userStream = await navigator.mediaDevices.getUserMedia({
@@ -79,7 +86,7 @@ const useAudioEngine = () => {
       // Start level monitoring
       updateLevels();
 
-} catch (err) {
+    } catch (err) {
       console.error("Audio engine initialization failed:", err);
       
       // Handle specific permission denied error
@@ -95,7 +102,13 @@ const useAudioEngine = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [playbackOnlyMode]);
+
+  const enablePlaybackOnlyMode = useCallback(() => {
+    setError(null);
+    setPlaybackOnlyMode(true);
+    initializeAudioContext(true);
+  }, [initializeAudioContext]);
 
   const updateLevels = useCallback(() => {
     if (!analyserRef.current) return;
@@ -117,13 +130,13 @@ const useAudioEngine = () => {
     animationFrameRef.current = requestAnimationFrame(updateLevels);
   }, [isPlaying]);
 
-  const startRecording = useCallback(() => {
-    if (!mediaRecorder || mediaRecorder.state !== "inactive") return;
+const startRecording = useCallback(() => {
+    if (playbackOnlyMode || !mediaRecorder || mediaRecorder.state !== "inactive") return;
 
     recordedChunksRef.current = [];
     mediaRecorder.start(100); // Collect data every 100ms
     setIsRecording(true);
-  }, [mediaRecorder]);
+  }, [mediaRecorder, playbackOnlyMode]);
 
   const stopRecording = useCallback(() => {
     if (!mediaRecorder || mediaRecorder.state !== "recording") return;
@@ -211,7 +224,7 @@ const useAudioEngine = () => {
     };
   }, [initializeAudioContext]);
 
-  return {
+return {
     // State
     isRecording,
     isPlaying,
@@ -222,6 +235,7 @@ const useAudioEngine = () => {
     audioBuffer,
     error,
     loading,
+    playbackOnlyMode,
     
     // Actions
     startRecording,
@@ -230,7 +244,8 @@ const useAudioEngine = () => {
     pauseAudio,
     stopAudio,
     seekTo,
-    retry: initializeAudioContext
+    retry: initializeAudioContext,
+    enablePlaybackOnlyMode
   };
 };
 
